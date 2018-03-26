@@ -2,7 +2,11 @@
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
 <<<<<<< HEAD
+<<<<<<< HEAD
     "python.pythonPath": "C:\\Users\\samip\\AppData\\Local\\Programs\\Python\\Python36-32\\python.exe"
+=======
+    "python.pythonPath": "/usr/local/bin/python3"
+>>>>>>> 585a9f036d54a80e8d7bbe84e20ea12a89fe3a77
 =======
     "python.pythonPath": "/usr/local/bin/python3"
 >>>>>>> 585a9f036d54a80e8d7bbe84e20ea12a89fe3a77
