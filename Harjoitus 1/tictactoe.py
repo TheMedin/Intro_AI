@@ -85,10 +85,10 @@ def PrintBoard(board):
     print('| ' + board[0] + ' | ' + board[1] + ' | ' + board[2] + ' |')
     print('|   |   |   |')
     print(13*'-')
-	
+
 def PlayersMark():
     # Tämä funktio kysyy, onko pelaaja X vai O
-    mark = ''                         
+    mark = ''
     while not (mark == 'X' or mark == 'O'):
         print('Do you want to be X or O: ',end="")
         mark = input().upper()

@@ -166,6 +166,38 @@ class ConnectFour:
 		#########################################################################
 		#SINUN KOODISI TÄHÄN
 		#########################################################################
+        if self.moves != 42 or depth > 0:
+            if opponent == "o":
+                v = -1000000000000
+                bestCol = None
+                for column in self.LegalMoves(board):
+                    newBoard = self.MakeMove(board,column,"x",self.LegalRow(column, board))
+                    nValue, nColumn = self.alphabetapruning(newBoard, depth - 1, "x", alpha, beta)
+                    newBoard = self.UnmakeMove(board,column, self.LegalRow(column, board))
+                    if v < nValue:
+                        v = nValue
+                        bestCol = column
+                    alpha = max(alpha, v)
+                    if beta <= alpha:
+                        break
+                return v, bestCol
+            else:
+                v = 1000000000000
+                bestCol = None
+                for column in self.LegalMoves(board):
+                    newBoard = self.MakeMove(board,column,"o",self.LegalRow(column, board))
+                    nValue, nColumn = self.alphabetapruning(newBoard, depth - 1, "o", alpha, beta)
+                    newBoard = self.UnmakeMove(board,column, self.LegalRow(column, board))
+                    if v > nValue:
+                        v = nValue
+                        bestCol = column
+                    beta = min(beta, v)
+                    if beta <= alpha:
+                        break
+                return v, bestCol
+        else:
+            return self.evaluation(board), None
+
 								
     def minimax(self, board, depth, opponent):
 		#Funktion parametrit:
@@ -210,8 +242,8 @@ class ConnectFour:
     def searchingfunction(self, board, depth, opponent):
         # Tämä funktio kutsuu alpfabeta-pruning (tai minimax) algoritmia, jonka jälkeen päivittää pelilaudan saadulla liikkeella ja palauttaa uuden pelilaudan
         newboard = copy.deepcopy(board)
-        #value, position = self.alphabetapruning(newboard, depth, opponent, -1000000000, 1000000000)
-        value, position=self.minimax(newboard, depth, opponent)
+        value, position = self.alphabetapruning(newboard, depth, opponent, -1000000000, 1000000000)
+        #value, position=self.minimax(newboard, depth, opponent)
         board = self.MakeMove(board, position, opponent, self.LegalRow(position, board))
         return board
 
