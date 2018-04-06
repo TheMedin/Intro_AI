@@ -48,7 +48,7 @@ def main():
     print("Vedenpinnataso vuonna 2025 on {}".format(round(coeffs[0]*2025+coeffs[1])))
 
     #########################################################################
-    #performance(Y_test, X_test, coeffs, function)
+    performance(Y_test, X_test, coeffs, function)
     plt.grid()   # Plotataan kuvaajaan ruudukko
     plt.show()   # Näytetään kuvaaja
 	
