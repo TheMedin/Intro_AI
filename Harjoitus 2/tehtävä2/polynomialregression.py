@@ -21,9 +21,11 @@ def main():
 	#SINUN KOODISI TÄHÄN
     #########################################################################
 
+    # testidatan osuus nostettu 0.2:n jotta kunnollinen ylisovittaminen onnistuisi
+
     # lineaarinen
 
-    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.1)
+    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
     coeffs = np.polyfit(X_train, Y_train, 1)
     function = np.poly1d(coeffs)
     x_line = np.linspace(min(X_train), max(X_train))
@@ -34,30 +36,31 @@ def main():
     performance(Y_test, X_test, coeffs, function)
 
 
-    # sopiva sovitus, viidennen asteen toimii yleensä hyvin mutta vaihtelee ajokerran mukaan
-    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.1)
-    coeffs = np.polyfit(X_train, Y_train, 5)
+    # sopiva sovitus, 12. asteen toimii yleensä hyvin mutta vaihtelee ajokerran mukaan
+
+    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
+    coeffs = np.polyfit(X_train, Y_train, 6)
     function = np.poly1d(coeffs)
     x_line = np.linspace(min(X_train), max(X_train))
     y_line = function(x_line)
 
     plt.scatter(X_train, Y_train, color="red", s=5, marker='x')
-    plt.plot(x_line, y_line, color="red", label="5. aste, sopiva sovitus")
+    plt.plot(x_line, y_line, color="red", label="6. aste, usein sopiva sovitus")
     performance(Y_test, X_test, coeffs, function)
 
     # ylisovitettu
-    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.1)
-    coeffs = np.polyfit(X_train, Y_train, 120)
+    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
+    coeffs = np.polyfit(X_train, Y_train, 220)
     function = np.poly1d(coeffs)
     x_line = np.linspace(min(X_train), max(X_train))
     y_line = function(x_line)
 
     plt.scatter(X_train, Y_train, color="orange", s=5, marker='x')
-    plt.plot(x_line, y_line, color="orange", label="120. aste, ylisovitettu")
+    plt.plot(x_line, y_line, color="orange", label="220. aste, ylisovitettu")
     performance(Y_test, X_test, coeffs, function)
 
 
-    plt.title("Lämpötila")
+    plt.title("Lämpötila kellonajan mukaan")
     plt.xlabel("Kellonaika")
     plt.ylabel("Lämpötila, C°")
 
