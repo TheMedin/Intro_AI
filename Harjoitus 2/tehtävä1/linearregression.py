@@ -45,7 +45,7 @@ def main():
     #print("Suomen väkiluku vuonna 2030 on {}".format(round(coeffs[0]*2035+coeffs[1])))
 
     # Sea level:
-    print("Vedenpinnataso vuonna 2025 on {}".format(round(coeffs[0]*2025+coeffs[1])))
+    print("Vedenpinnantaso vuonna 2025 on {}".format(round(coeffs[0]*2025+coeffs[1])))
 
     #########################################################################
     performance(Y_test, X_test, coeffs, function)
