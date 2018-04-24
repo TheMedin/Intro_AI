@@ -36,35 +36,38 @@ def Minimax(board, maximizingplayer, player):
     for i in range(len(board)):   # Tarkistaa tyhjät paikat ja listää ne listaan legal_moves
         if board[i]=="-":
             legal_moves.append(i)
-    print(legal_moves)
-
-    PrintBoard(board)
     #########################################################################
     #SINUN KOODISI TÄHÄN
     #########################################################################
-    if not IsWinning(board) and len(legal_moves) > 0:
+    if legal_moves:
         if maximizingplayer:
             bestValue = -2
+            bestMove = None
             for move in legal_moves:
                 board[move] = player
-                if not IsWinning(board): ## ???
+                if IsWinning(board):
+                    v = 1
+                else:
                     v, vMove = Minimax(board, False, nextplayer)
                 board[move] = "-"
-                if bestValue > v:
-                    return bestValue, move
-                else:
-                    return v, vMove
+                if bestValue < v:
+                    bestValue = v
+                    bestMove = move
         else:
             bestValue = 2
+            bestMove = None
             for move in legal_moves:
                 board[move] = player
-                v, vMove = Minimax(board, True, nextplayer)
-                board[move] = "-"
-                if bestValue < v:
-                    return bestValue, move
+                if IsWinning(board):
+                    v = -1
                 else:
-                    return v, vMove
-    else:
+                    v, vMove = Minimax(board, True, nextplayer)
+                board[move] = "-"
+                if bestValue > v:
+                    bestValue = v
+                    bestMove = move
+        return bestValue, bestMove
+    return 0, None
 
 
 def PrintBoard(board):
@@ -82,10 +85,10 @@ def PrintBoard(board):
     print('| ' + board[0] + ' | ' + board[1] + ' | ' + board[2] + ' |')
     print('|   |   |   |')
     print(13*'-')
-	
+
 def PlayersMark():
     # Tämä funktio kysyy, onko pelaaja X vai O
-    mark = ''                         
+    mark = ''
     while not (mark == 'X' or mark == 'O'):
         print('Do you want to be X or O: ',end="")
         mark = input().upper()

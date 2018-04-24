@@ -125,13 +125,36 @@ class EightPuzzle:
         ######################################################################### 
         #SINUN KOODISI TÄHÄN
         #########################################################################
-        
+        while openlist:
+            current = self.GetLowestF(openlist, fscore)
+            if self.GameSolved(current):
+                return self.ReconstructPath(camefrom, current)
+
+            openlist.remove(current)
+            closedlist.append(current)
+
+            neighbors = self.FindNextStates(current)
+            for neighbor in neighbors:
+                if neighbor in closedlist:
+                    continue
+
+                if neighbor not in openlist:
+                    openlist.append(neighbor)
+
+                tentative_gScore = gscore[self.ListToString(current)] + 1
+                #if tentative_gScore >= gscore[self.ListToString(neighbor)]:
+                #    continue
+                
+                camefrom[self.ListToString(neighbor)] = current
+                gscore[self.ListToString(neighbor)] = tentative_gScore
+                fscore[self.ListToString(neighbor)] = gscore[self.ListToString(neighbor)] + self.Manhattan(neighbor)
+        return None
 		
 def main():
     print('8-Puzzle Solver!')
     print(15 * '-')
     game = EightPuzzle()
-    print('The starting state is:')
+    print('The starting state is:') 
     initialstate = game.InitialState(50)
     game.PrintState(initialstate)
     print('The target state will be:')
