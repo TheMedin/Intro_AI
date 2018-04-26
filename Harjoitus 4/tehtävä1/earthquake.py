@@ -25,7 +25,6 @@ def Silhouette_score(X):
             best_score = silhouette
             best_cluster_num = i
 
-
     return best_cluster_num
 
 def Kmeans(X, num_clusters):
@@ -43,7 +42,7 @@ def Dbscan(X):
     Tämä funktio ottaa argumenttina datanäytteet ja opettaa DBSCAN luokittelijan ja lopuksi palauttaa luokiteltujen datanäytteiden ennustetut ryhmät
     """
 	###### SINUN KOODISI TÄHÄN  ########
-    dbscan = DBSCAN(eps=0.07, min_samples=16).fit(X)
+    dbscan = DBSCAN(eps=0.025, min_samples=16).fit(X)
     labels = dbscan.labels_
     return labels
 
