@@ -15,10 +15,11 @@ def Load_handdetection_dataset():
     """
     Ladataan tässä funktiossa käsimerkki-data
     """
-    with open("handdetection.pkl", "rb") as f:
+    with open("handdetection-dataset.pkl", "rb") as f:
         data = pickle.load(f) 
     X_orig1,y = data[0], data[1]
-    X_data1 = np.reshape(X_orig1, (700, 15000))
+#    X_data1 = np.reshape(X_orig1, (700, 15000))
+    X_data1 = np.reshape(X_orig1, (403, 15000))
     y_labels1 = ['${}$'.format(x) for x in y]
 
     chars = ["1","2","3","4","5","6"]
