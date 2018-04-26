@@ -50,16 +50,26 @@ def Train_tsne(X_data):
     
     Funktio ottaa argumenttina datan ja palauttaa redusoidun ja skaalatun datan sekä ajan, joka algoritmin ajamiseen kesti.
     """
-	###### SINUN KOODISI TÄHÄN  ########
-	
-	
+    ###### SINUN KOODISI TÄHÄN  ########
+    t0 = time()
+    X_tsne = TSNE(n_components=2, metric='sqeuclidean').fit_transform(X_data)
+    t1 = time()
+    X_scaled = MinMaxScaling(X_tsne)
+    return X_scaled, t1 - t0
+
 def Train_PCA(X_data):
     """
     Toteuta PCA algoritmin opettaminen. Normalisoi datanäytteet välille [0,1] pisteiden piirtämistä varten MinMaxScaling funktiolla. Laske myös algoritmin käyttämä suoritusaika.
     
     Funktio ottaa argumenttina datan ja palauttaa redusoidun ja skaalatun datan sekä ajan, joka algoritmin ajamiseen kesti.
     """
-	###### SINUN KOODISI TÄHÄN  ########
+    ###### SINUN KOODISI TÄHÄN  ########
+    t0 = time()
+    X_PCA = PCA(n_components=2).fit_transform(X_data)
+    t1 = time()
+    X_scaled = MinMaxScaling(X_PCA)
+    return X_scaled, t1 - t0
+
 	
 def Train_MDS(X_data):
     """
@@ -68,6 +78,11 @@ def Train_MDS(X_data):
     Funktio ottaa argumenttina datan ja palauttaa redusoidun ja skaalatun datan sekä ajan, joka algoritmin ajamiseen kesti.
     """
 	###### SINUN KOODISI TÄHÄN  ########	
+    t0 = time()
+    X_MDS = MDS().fit_transform(X_data)
+    t1 = time()
+    X_scaled = MinMaxScaling(X_MDS)
+    return X_scaled, t1 - t0
 	
 def Evaluation(X_data, truelabels):
     """
